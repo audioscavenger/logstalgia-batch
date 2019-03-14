@@ -16,14 +16,17 @@ Since I'm using it on Windows, I created this simple and crappy GUI that I use p
 ## Installation
 
 ### Requirements
-AFAIK, vanilla Windows does not offer the SSH tools that allows you to connect remotely without prompt. So, you need Putty + pAgent, and make sure your remote server private key is loaded.
+AFAIK, vanilla Windows does not offer the SSH tools that allows you to connect remotely without prompt. So, you need Putty + pLink + pAgent, and make sure your remote server private key is loaded in pAgent. I will not explain how to remote access a server via SSH nor how to create an excrypted RSA key, there are zillions of posts available on the subject :)
 
 * [Logstalgia portable](https://github.com/acaudwell/Logstalgia/releases/download/logstalgia-1.0.9/logstalgia-1.0.9.win64.zip)
-* [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-* [pAgent](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+* [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) do I need to present Putty?
+* [pLink](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) the binary used by this batch
+* [pAgent](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) you definitely need that
+* a Putty session in your registry, that you configure in the script
 * your own remote server private key loaded in pAgent
 
 ### Procedure
+0) Make sure your created a Putty session, and loaded your remote RSA key in pAgent
 1) unzip / install logstalgia somewhere
 2) clone this repo somewhere else, or just download the only 2 files needed
 3) customize paths and variables in the batch file as indicated
@@ -60,7 +63,6 @@ None that I am aware of.
 ### Todo List
 - [x] let the user enter its own *startfrom* date
 - [ ] see if a multi profile setting in the menu is relevant
-- [ ] see if it's easier to use pLink or not
 
 ## License
 This project is distributed under [GNU Affero General Public License, Version 3][AGPLv3].
