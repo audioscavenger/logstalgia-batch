@@ -62,7 +62,9 @@ None that I am aware of.
 
 ### Todo List
 - [x] let the user enter its own *startfrom* date
+- [ ] adapt animations speeds depending on replay speed
 - [ ] see if a multi profile setting in the menu is relevant
+- [ ] remove logstalgia settings from the batch or remove ini file, either one
 
 ## License
 This project is distributed under [GNU Affero General Public License, Version 3][AGPLv3].
