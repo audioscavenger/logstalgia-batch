@@ -44,7 +44,7 @@ Dates and time are calculated automatically for convenience.
 ```
 Replay? [Y/n] n
 TODAY        = [ ] = 2019-03-13
-FROM yesterday=[y] = 2019-03-12 00:01
+FROM yesterday=[y] = 2019-03-12 18:48
 FROM midnight= [m] = 2019-03-13 00:01
 FROM 1 hour  = [1] = 2019-03-13 17:48
 FROM now     = [0] = 2019-03-13 18:48
@@ -62,7 +62,9 @@ None that I am aware of.
 
 ### Todo List
 - [x] let the user enter its own *startfrom* date
-- [ ] adapt animations speeds depending on replay speed
+- [x] adapt animations speeds depending on replay speed
+- [x] update default replay speed
+- [x] show usual GUI command help on screen
 - [ ] see if a multi profile setting in the menu is relevant
 - [ ] remove logstalgia settings from the batch or remove ini file, either one
 
