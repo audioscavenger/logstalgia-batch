@@ -23,18 +23,17 @@ REM load-config=path to logstalgia config file.ini: start logstalgia with --save
 REM the default viewport=1280x720
 set load-config=%DIRNAME%profile-default.ini
 
-REM default commands for either replay or follow; use absolute path if not accessible from %PATH%
-REM you need commands cat and tail available from https://sourceforge.net/projects/getgnuwin32/files/getgnuwin32/
+REM default remote commands for either log replay or follow
 set remoteCmdReplay=cat
 set remoteCmdTailPlus=tail -fq
 set remoteCmdTail=tail -fqn1
 
-REM defaults: by default we propose to REPLAY but we must set default commands to FollowPlus for scripting reasons
+REM defaults: by default we propose to REPLAY but we must set default commands to FollowPlus for batch scripting reasons
 set FROMDATE=1
 set REPLAY=Y
 set SPEED=20
 set FOLLOW=-
-set command=%remoteCmdTailPlus%
+set remoteCommand=%remoteCmdTailPlus%
 
 :: -----------------------------------------
 :MAIN
@@ -81,7 +80,7 @@ REM SPEED is adjusted depending on FROMDATE
 if "x%FROMDATE%x" EQU "xmx" set STARTFROM=%GOOD_DATE% 00:01
 if "x%FROMDATE%x" EQU "x1x" set STARTFROM=%GOOD_DATE% %lastHour%
 if "x%FROMDATE%x" EQU "x1x" set SPEED=1
-if "x%FROMDATE%x" EQU "x0x" set command=%remoteCmdTail%
+if "x%FROMDATE%x" EQU "x0x" set remoteCommand=%remoteCmdTail%
 if "x%FROMDATE%x" EQU "x0x" set SPEED=1
 REM SPEED is asked only if not following logs at current time:
 if "x%FROMDATE%x" NEQ "x0x" set /p SPEED=SPEED? [%SPEED%] 
@@ -93,7 +92,7 @@ REM pause
 goto :EOF
 
 :setReplay
-set command=%remoteCmdReplay%
+set remoteCommand=%remoteCmdReplay%
 set FOLLOW=
 goto :EOF
 
@@ -107,7 +106,7 @@ echo.
 if DEFINED STARTFROM echo STARTING--from=%STARTFROM%
 
 pushd %logstalgiaDir%
-%PUTTYBIN% -load "%PUTTY_SESSION%" %command% %LOGS% | ^
+%PUTTYBIN% -load "%PUTTY_SESSION%" %remoteCommand% %LOGS% | ^
 logstalgia --full-hostnames ^
 --simulation-speed %SPEED% ^
 --pitch-speed 0.1 ^
