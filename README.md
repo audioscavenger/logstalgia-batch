@@ -50,21 +50,27 @@ AFAIK, vanilla Windows does not offer the SSH tools that allows you to connect r
 Below is the list of variables to setup in the batch:
 
 * logstalgiaDir - self explanatory
+
 `set logstalgiaDir=Z:\APPS\logstalgia-1.0.9.win64`
 
 * PUTTYBIN - self explanatory; get it from https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+
 `set PUTTYBIN=S:\wintools\lan\putty\64\plink.exe`
 
 * PUTTY_SESSION=saved putty session in registry - must be password free: use pAgent with loaded RSA key for that purpose
+
 `set PUTTY_SESSION=puttySessionName`
 
 * setup your remote logs path accordingly; it's nginx by default + custom path; LOGS should respect NCSA extended/combined log format and TZ should be set in system/systemd
+
 `set LOGS=/var/log/nginx/access.log /data/www/html/*.com/logs/access.log`
 
 * it's possible to specify a different TZ from the server; use signed integers: -5, +12, etc
+
 `set TZ=0`
 
 * load_config=path to logstalgia config file.ini: start logstalgia with --save-config CONFIG_FILE to generate one; the default viewport=1280x720
+
 `set load_config=%DIRNAME%profile-default.ini`
 
 
