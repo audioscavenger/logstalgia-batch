@@ -9,9 +9,9 @@ REM PUTTYBIN - self explanatory; get it from https://www.chiark.greenend.org.uk/
 set PUTTYBIN=S:\wintools\lan\putty\64\plink.exe
 
 REM PUTTY_SESSION=saved putty session in registry - must be password free: use pAgent with loaded RSA key for that purpose
-set PUTTY_SESSION=web-scav-01
+set PUTTY_SESSION=puttySessionName
 
-REM setup your logs path accordingly; it's nginx by default + custom path
+REM setup your remote logs path accordingly; it's nginx by default + custom path
 REM LOGS should respect NCSA extended/combined log format and TZ should be set in system/systemd
 set LOGS=/var/log/nginx/access.log /data/www/html/*.com/logs/access.log
 REM set LOGS=/data/www/html/*.com/logs/access.extended.log
@@ -19,9 +19,9 @@ REM set LOGS=/data/www/html/*.com/logs/access.extended.log
 REM it's possible to specify a different TZ from the server; use signed integers: -5, +12, etc
 set TZ=0
 
-REM load-config=path to logstalgia config file.ini: start logstalgia with --save-config CONFIG_FILE to generate one
+REM load_config=path to logstalgia config file.ini: start logstalgia with --save-config CONFIG_FILE to generate one
 REM the default viewport=1280x720
-set load-config=%DIRNAME%profile-default.ini
+set load_config=%DIRNAME%profile-default.ini
 
 REM default remote commands for either log replay or follow
 set remoteCmdReplay=cat
@@ -148,7 +148,7 @@ logstalgia --full-hostnames ^
 --paddle-position 0.5 ^
 --paddle-mode vhost ^
 --display-fields timestamp,hostname,response_code,method,protocol,path,referrer,user_agent ^
---load-config %load-config% ^
+--load-config %load_config% ^
 --detect-changes %STARTFROM% %FOLLOW%
 
 
