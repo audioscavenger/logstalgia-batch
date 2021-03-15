@@ -2,14 +2,15 @@
 set DIRNAME=%~dp0
 REM pushd %DIRNAME%
 
+:init
 REM logstalgiaDir - self explanatory
-set logstalgiaDir=Z:\APPS\logstalgia-1.0.9.win64
+set logstalgiaDir=S:\APPS\logstalgia-1.0.9.win64
 
 REM PUTTYBIN - self explanatory; get it from https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
 set PUTTYBIN=S:\wintools\lan\putty\64\plink.exe
 
 REM PUTTY_SESSION=saved putty session in registry - must be password free: use pAgent with loaded RSA key for that purpose
-set PUTTY_SESSION=puttySessionName
+set PUTTY_SESSION=
 
 REM setup your remote logs path accordingly; it's nginx by default + custom path
 REM LOGS should respect NCSA extended/combined log format and TZ should be set in system/systemd
@@ -35,6 +36,16 @@ set SPEED=10
 set pitch-speed=0.1
 set FOLLOW=-
 set remoteCommand=%remoteCmdTailPlus%
+
+:prechecks
+IF NOT EXIST %logstalgiaDir%\logstalgia.exe echo ERROR: %logstalgiaDir%\logstalgia.exe not found & pause & exit /b 1
+IF NOT DEFINED PUTTY_SESSION (
+  echo PUTTY_SESSIONS:
+  echo ------------------------------
+  for /f "tokens=6 delims=\" %%a in ('reg QUERY HKCU\Software\SimonTatham\PuTTY\Sessions') DO echo                %%a
+  set /P PUTTY_SESSION=PUTTY_SESSION: 
+)
+IF NOT DEFINED PUTTY_SESSION goto :prechecks
 
 :: -----------------------------------------
 :MAIN
@@ -143,8 +154,8 @@ logstalgia --full-hostnames ^
 --simulation-speed %SPEED% ^
 --pitch-speed %pitch-speed% ^
 --glow-duration 1 ^
---glow-intensity 2 ^
---glow-multiplier 2 ^
+--glow-intensity 8 ^
+--glow-multiplier 5 ^
 --paddle-position 0.5 ^
 --paddle-mode vhost ^
 --display-fields timestamp,hostname,response_code,method,protocol,path,referrer,user_agent ^
